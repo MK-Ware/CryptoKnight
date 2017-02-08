@@ -19,4 +19,6 @@ CryptoKnight is a general purpose cryptography app
 1. Public key cryptography (RSA, DSA, Elgamal).
 2. Steganography (F5 algorithm)
 
+#If you want the compiled runnable jar/exe instead of the source , check the releases tab.
+
 #Feedback and contributions are welcome.
