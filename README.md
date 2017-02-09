@@ -1,6 +1,8 @@
 # CryptoKnight
 CryptoKnight is a general purpose cryptography app
 
+[CryptoKnight.v1.0.0_1_1.jpg](https://postimg.org/image/9aeigiqpz/)
+
 #Features:
 1. Text and file encryption
 2. 9 encryption algorithms (AES - Rijndael - Twofish - Threefish - Shacal2 - CAST6 - RC6 - Camellia - Serpent)
