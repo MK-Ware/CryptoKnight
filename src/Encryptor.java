@@ -129,7 +129,7 @@ public class Encryptor
 		case 7:
 		case 8:
 		case 1:
-			this.ivData = new byte[this.blockSize/8];
+			this.ivData = new byte[KeySize/8];
 			System.arraycopy(Encrypted, 0, this.ivData, 0, blockSize/8);
 			break;
 		default:
