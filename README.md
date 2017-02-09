@@ -1,7 +1,7 @@
 # CryptoKnight
 CryptoKnight is a general purpose cryptography app
 
-[CryptoKnight.v1.0.0_1_1.jpg](https://postimg.org/image/9aeigiqpz/)
+[![CryptoKnight.v1.0.0_1_1.jpg](https://s23.postimg.org/ii6qx7xsb/Crypto_Knight_v1_0_0_1_1.jpg)](https://postimg.org/image/9aeigiqpz/)
 
 #Features:
 1. Text and file encryption
