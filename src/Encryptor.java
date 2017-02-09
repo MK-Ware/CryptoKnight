@@ -67,11 +67,16 @@ public class Encryptor
 		switch (KeySize)
 		{
 		case 128:
+		case 192:
 			Algs[1] = new RijndaelEngine(KeySize);
 			break;
 		
-		default:
+		case 256:
 			Algs[1] = new RijndaelEngine(KeySize);
+			Algs[7] = new ThreefishEngine(KeySize);
+			break;
+		
+		default:
 			Algs[7] = new ThreefishEngine(KeySize);
 			break;
 		}
