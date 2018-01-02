@@ -3,7 +3,7 @@ CryptoKnight is a general purpose cryptography app
 
 [![CryptoKnight.v1.0.0_1_1.jpg](https://s23.postimg.org/ii6qx7xsb/Crypto_Knight_v1_0_0_1_1.jpg)](https://postimg.org/image/9aeigiqpz/)
 
-#Features:
+# Features:
 1. Text and file encryption
 2. 9 encryption algorithms (AES - Rijndael - Twofish - Threefish - Shacal2 - CAST6 - RC6 - Camellia - Serpent)
 3. Supports 128, 192, and 256 bit key sizes (512 for Shacal2, and 512 and 1024 for Threefish)
@@ -17,10 +17,16 @@ CryptoKnight is a general purpose cryptography app
 10. User friendly GUI.
 11. 100% free
 
-#Planned features:
+# Planned features:
 1. Public key cryptography (RSA, DSA, Elgamal).
 2. Steganography (F5 algorithm)
 
-#If you want the compiled runnable jar/exe instead of the source , check the releases tab.
+# Setup and Run:
+- If you're on Windows, there's a compiled exe binary you can grab from the releases page. All you need to do is extract the contents of the zip file and double click the exe file.. That's it!
+
+- Linux users have one of 2 options (option b should be faster to launch):
+a. Run the compiled windows binary same as above using wine.
+b. You'll need Java JDK or JRE environment installed. Download the jar version from releases, open your terminal and navigate to the directory containing the .jar file, type "sudo chmod +x CryptoKnight.v1.0.0.jar" (without the quotes, and if you renamed the jar file you should modify the command accordingly). Right click on the jar file and select open with Java Runtime. To create a shortcut on desktop right click on your desktop and select "Create a new launcher here", enter CryptoKnight (or whatever name you want for the launcher) in the name field, type "java -jar <path to the jar file>" (again, without the quotes, eg: java -jar /home/<your username>/APPs/CryptoKnight.v1.0.0.jar) in the command field, and finally type "Encrypt your text and files" in the comment field, change the default icon to the left to anything you like (I have included a default icon.png with the source code) and click ok. You're good to go!
+
 
 #Feedback and contributions are welcome.
