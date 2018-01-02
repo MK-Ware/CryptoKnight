@@ -13,11 +13,11 @@ CryptoKnight is a general purpose cryptography app
 (MD2 - MD5 - SHA1 - SHA224 - SHA256 - SHA384 - SHA512 - bcrypt - scrypt)
 7. Password booster generates strong yet reproducible passwords (check the source code or help => FAQ for algorithm details)
 8. Random password generator with full control over password characters
-9. Secure implementation & cryptographic salts
-10. User friendly GUI.
-11. Cross platform; works on windows, mac OSX and Linux.
+9. Secure implementation (uses bouncy castle library) & cryptographic salts
+10. User friendly, multi-threaded GUI.
+11. Cross platform; works on Windows, mac OSX and Linux.
 12. Windows binary version comes with a bundled JRE so you don't even have to have java installed.
-13. 100% free
+13. Open source, 100% free
 
 # Planned features:
 1. Steganography (F5 algorithm)
