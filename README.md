@@ -15,14 +15,16 @@ CryptoKnight is a general purpose cryptography app
 8. Random password generator with full control over password characters
 9. Secure implementation & cryptographic salts
 10. User friendly GUI.
-11. 100% free
+11. Cross platform; works on windows, mac OSX and Linux.
+12. Windows binary version comes with a bundled JRE so you don't even have to have java installed.
+13. 100% free
 
 # Planned features:
 1. Public key cryptography (RSA, DSA, Elgamal).
 2. Steganography (F5 algorithm)
 
 # Setup and Run:
-- If you're on Windows, there's a compiled exe binary you can grab from the releases page. All you need to do is extract the contents of the zip file and double click the exe file.. That's it!
+- If you're on Windows, there's a compiled exe binary you can grab from the releases page. All you need to do is extract the contents of the zip archive and double click the exe file.. That's it!
 
 - Linux users have one of 2 options (option b should be faster to launch):
 a. Run the compiled windows binary same as above using wine.
