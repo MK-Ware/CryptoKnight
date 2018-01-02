@@ -31,3 +31,5 @@ b. You'll need Java JDK or JRE environment installed ([click here](https://askub
 
 
 #Feedback and contributions are welcome.
+
+# If you like it, don't forget to star the repo
