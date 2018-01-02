@@ -20,8 +20,7 @@ CryptoKnight is a general purpose cryptography app
 13. 100% free
 
 # Planned features:
-1. Public key cryptography (RSA, DSA, Elgamal).
-2. Steganography (F5 algorithm)
+1. Steganography (F5 algorithm)
 
 # Setup and Run:
 - If you're on Windows, there's a compiled exe binary you can grab from the [releases page](https://github.com/MonroCoury/CryptoKnight/releases). All you need to do is extract the contents of the zip archive and double click the exe file.. That's it!
