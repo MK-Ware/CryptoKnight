@@ -11,7 +11,7 @@ public class PwdGen
 	public static String BoostPass(String OrigPass, int multKey, int RandSeed, int len) throws NoSuchAlgorithmException
 	{
 		
-		String HashedPass = HashFactory.SCryptHash(OrigPass, 13, 128, 256, 50, 0);
+		String HashedPass = HashFactory.SCryptHash(OrigPass, 64, 192, 256, 50, 0);
 		String EncPass = Base64.encodeBase64String(HashedPass.getBytes());
 		
 		String ExtPass = "";
