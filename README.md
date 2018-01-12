@@ -23,7 +23,7 @@ CryptoKnight is a general purpose cryptography app
 1. Steganography (F5 algorithm)
 
 # Setup and Run:
-- If you're on Windows, there's a compiled exe binary you can grab from the [releases page](https://github.com/MonroCoury/CryptoKnight/releases). All you need to do is extract the contents of the zip archive and double click the exe file.. That's it!
+- If you're on Windows, there's a compiled exe binary you can grab from the [releases page](https://github.com/MonroCoury/CryptoKnight/releases). All you need to do is extract the contents of the zip archive (you might need 7-zip, which can be found at: http://www.7-zip.org/download.html), and double click the exe file.. That's it!
 
 - Linux users have one of 2 options (option b should be faster to launch):<br />
 a. Run the compiled windows binary same as above using wine.<br />
