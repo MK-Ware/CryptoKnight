@@ -110,7 +110,7 @@ public class GUI extends JFrame{
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        this.setTitle("CryptoKnight 0.1");
+        this.setTitle("CryptoKnight 0.0.2");
         
         ListenForButton L4B = new ListenForButton();
         
@@ -519,7 +519,7 @@ public class GUI extends JFrame{
         HRow2.setLayout(new BoxLayout(HRow2, BoxLayout.Y_AXIS));
         
         FAQText = new JTextArea(18, 28);
-        FAQText.setText("Frequently Asked Questions:\n\nQ: Encryption doesn't work with keys larger than 192 bit! Why?\nA: Due to a ridiculous limitation imposed by Java, you can only use 192 (sometimes 128) bit keys or below. To overcome this, you need to replace the stock security policy files with the unlimited ones provided for free by Oracle. Just google JCE_policy-(your java version number for example 7 or 8).zip, download it, and unzip the content of the included UnlimitedJCEPolicyJDK folder to the directory containing your java security policy files. for example, if you're on windowse, go to the drive where you installed java jre or jdk, and the target directory would be java/jre (or jdk)/lib/security/.\n\nQ: Does this program store my passwords?\nA: No, because it doesn't need to. Before encrypting anything, a key (which is more complicated than just a password) is generated, and the password is part of the key parameters. In other words, the password becomes part of what converts your nice plain text to meaningless gibberish. When you try to decrypt a ciphertext, the decryption password is used to construct key parameters, and if all is good, those parameters convert the nonsense back to readable plain text.\n\nQ: Why doesn't this app provide a password vault?\nA: A password vault is just an encrypted file containing a table of usernames and corresponding passwords. You can easily create a word/excel file, store your passwords in it, and encrypt it using one of the provided algorithms.\n\nQ: Isn't AES and Rijndael one and the same?\nA: No. Rijndael is ablock cipher that supports 128 192 256 bit key size, and 128 192 224 and 256 block sizes. AES is a subset of Rijndael that accepts the same key sizes, but has a fixed block size (128 bit). To offer more flexibility, the app offers both.\n\nQ: Is there a way to recover forgotton passwords?\nA: Unfortunately, there is no way this program can tell who is trying to access the data. As a result there it is impossible to give anyone a chance to recover lost passwords without introducing a backdoor. If you forgot your password, any data encrypted with it is lost forever.\n\nQ: What is 'Quick Mode'?\nA: Normally, the program uses SHA-512 hashing when generating secret keys. By checking Quick Mode you opt to use SHA-256, leading to quicker encryption/decryption. Theoretically, that makes attacks on your keys more affordable, but I still can't imagine a successful attack against them. However, keep in mind that data encrypted with Quick Mode, can only be decrypted with the same mode, and vice versa.\n\nQ: Which encryption algorithm is the most secure?\nA: This question gets asked a lot, short answer: none of the offered algorithms has ever been compromised. Long version: exhausting half the key space of even a 128 bit key os a symmetric cipher would take longer than the life-time of the universe. The most serious threat to your data is a weak password, so choose your password wisely.\n\nQ: What exactly does the password booster do?\nA: This feature is meant to help users generate reproducile, yet powerful passwords. I would've preffered to keep that secret, but since this app is open source, anyone can get the source code and find out themselves. First the password booster calculates an scrypt hash of your password, then it encodes that hashed pass in base64, third step is multiplying the base64 string by a multiplication key provided by the user, afterwards, 2 pseudorandom numbers p1 and p2 are generated based on the random seed (also given by the user) and the specified password length, and used as slice borders for a substring of the huge base64 string from step 3. Finally 4 pseudorandom positions are generated based on the same seed, and 4 special characters are inserted at those positions. The same multiplication key, seed, and length always give the same result with any one password.");
+        FAQText.setText("Frequently Asked Questions:\n\nQ: Encryption doesn't work with keys larger than 192 bit! Why?\nA: Due to a ridiculous limitation imposed by Java, you can only use 192 (sometimes 128) bit keys or below. To overcome this, you need to replace the stock security policy files with the unlimited ones provided for free by Oracle. Just google JCE_policy-(your java version number for example 7 or 8).zip, download it, and unzip the content of the included UnlimitedJCEPolicyJDK folder to the directory containing your java security policy files. for example, if you're on windowse, go to the drive where you installed java jre or jdk, and the target directory would be java/jre (or jdk)/lib/security/.\n\nQ: Does this program store my passwords?\nA: No, because it doesn't need to. Before encrypting anything, a key (which is more complex than just a password) is generated, and the password is part of the key parameters. In other words, the password is a part of what turns your nice plain text into meaningless gibberish. When you try to decrypt a ciphertext, the decryption password is used to construct the key parameters, and if all is good, those parameters turn the gibberish back into readable plain text.\n\nQ: Why doesn't this app provide a password vault?\nA: A password vault is just an encrypted file containing a table of usernames and corresponding passwords. You can easily create a word/excel file, store your passwords in it, and encrypt it using one of the provided algorithms.\n\nQ: Isn't AES and Rijndael one and the same?\nA: No. Rijndael is a block cipher that supports 128, 192, and 256 bit key size, and 128, 192, 224, and 256 block sizes. AES is a subset of Rijndael that accepts the same key sizes, but has a fixed block size (128 bit). To offer more flexibility, this app offers both.\n\nQ: Is there a way to recover a forgotton password?\nA: Unfortunately, the app has no way of telling who is trying to access the data without a valid password, as a result it is impossible to add password recovery without introducing a backdoor. If you forgot your password, any data encrypted with it is lost forever.\n\nQ: What is 'Quick Mode'?\nA: Normally, the program uses SHA-512 hashing when generating secret keys. By checking Quick Mode you opt to use SHA-256, leading to quicker encryption/decryption. Theoretically, this makes attacks on your keys more affordable, but I still can't imagine a successful attack against them. However, keep in mind that data encrypted with Quick Mode, can only be decrypted with the same mode, and vice versa.\n\nQ: Which encryption algorithm is the most secure?\nA: This question gets asked a lot, short answer: none of the offered algorithms has ever been compromised. Long version: exhausting half the key space of even a 128 bit key would take longer than the lifetime of the universe. The most serious threat to your data is a weak password, so choose your password wisely.\n\nQ: What exactly does the password booster do?\nA: This feature is meant to help users generate reproducile, yet powerful passwords. I would've preffered to keep it secret, but since this app is open source, anyone can read the source code and find out for themselves. First the password booster calculates an scrypt hash of your password, then it encodes that hashed pass in base64, third step is multiplying the base64 string by a multiplication key provided by the user, afterwards, 2 pseudorandom numbers p1 and p2 are generated based on a random seed (also given by the user) and the specified password length, and used as slice borders for a substring of the huge base64 string from step 3. Finally 4 pseudorandom positions are generated based on the same seed, and 4 special characters are inserted at these positions. The same multiplication key, seed, and length always give the same result with any one password.");
         FAQText.setLineWrap(true);
         FAQText.setWrapStyleWord(true);
         FAQText.setEditable(false);
@@ -842,6 +842,8 @@ public class GUI extends JFrame{
         	        				}
         							
             						FileEncrypt.wipeFile(InputFile.getText());
+            						long elapsed = System.nanoTime() - start;
+            						FReport.setText(OpRes + "\n\nTotal time: " + elapsed/1e9 + " seconds.");
             						JOptionPane.showMessageDialog(GUI.this, "Input file wiped successfully", "Success!", JOptionPane.INFORMATION_MESSAGE);
     							}
             					catch (FileNotFoundException e)
@@ -876,12 +878,7 @@ public class GUI extends JFrame{
             					OpRes = e.getMessage();
             				}
         				}
-        				
-        				long elapsed = System.nanoTime() - start;
-        				
-        				FReport.setText(OpRes + "\n\nTotal time: " + elapsed/1e9 + " seconds.");
 
-        				
 
         			}//end of run body
         			
@@ -929,6 +926,8 @@ public class GUI extends JFrame{
         	        				}
         							
             						FileEncrypt.wipeFile(InputFile.getText());
+            						long elapsed = System.nanoTime() - start;
+                    				FReport.setText(OpRes + "\n\nTotal time: " + elapsed/1e9 + " seconds.");
             						JOptionPane.showMessageDialog(GUI.this, "Input file wiped successfully", "Success!", JOptionPane.INFORMATION_MESSAGE);
     							}
             					catch (FileNotFoundException e)
@@ -963,9 +962,6 @@ public class GUI extends JFrame{
             					OpRes = e.getMessage();
             				}
         				}
-        				long elapsed = System.nanoTime() - start;
-        				
-        				FReport.setText(OpRes + "\n\nTotal time: " + elapsed/1e9 + " seconds.");
         				
         			}//end of run body
         			

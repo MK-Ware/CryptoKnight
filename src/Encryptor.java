@@ -1,3 +1,4 @@
+
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -25,10 +26,12 @@ import org.bouncycastle.crypto.engines.SerpentEngine;
 import org.bouncycastle.crypto.engines.Shacal2Engine;
 import org.bouncycastle.crypto.engines.ThreefishEngine;
 import org.bouncycastle.crypto.engines.TwofishEngine;
-import org.bouncycastle.crypto.modes.CBCBlockCipher;
+import org.bouncycastle.crypto.modes.GCMBlockCipher;
 import org.bouncycastle.crypto.paddings.BlockCipherPadding;
 import org.bouncycastle.crypto.paddings.PKCS7Padding;
 import org.bouncycastle.crypto.paddings.PaddedBufferedBlockCipher;
+import org.bouncycastle.crypto.modes.AEADBlockCipher;
+import org.bouncycastle.crypto.modes.CBCBlockCipher;
 import org.bouncycastle.crypto.params.KeyParameter;
 import org.bouncycastle.crypto.params.ParametersWithIV;
 import org.bouncycastle.crypto.params.TweakableBlockCipherParameters;
@@ -37,12 +40,12 @@ public class Encryptor
 {
 	private int blockSize;
 	private byte[] ivData;
-	private BlockCipherPadding padding;
 	private SecretKeyFactory factory;
 	private String salt;
 	private KeySpec spec;
 	private SecretKey tmp;
 	private KeyParameter keyParam;
+	private BlockCipherPadding padding;
 	
 	private Object[] Algs = {new AESEngine(), null, new TwofishEngine(), new CamelliaEngine(), new SerpentEngine(), new CAST6Engine(), new RC6Engine(), null, new Shacal2Engine()};
 	
@@ -72,7 +75,7 @@ public class Encryptor
 			break;
 		
 		case 256:
-			Algs[1] = new RijndaelEngine(KeySize);
+			Algs[1] = new RijndaelEngine(128);
 			Algs[7] = new ThreefishEngine(KeySize);
 			break;
 		
@@ -81,7 +84,8 @@ public class Encryptor
 			break;
 		}
 		
-		padding = new PKCS7Padding();		
+		padding = new PKCS7Padding();
+			
 	}
 	
 	public void setEncParameters(int alg, String pwd, int KeySize, String mode) throws NoSuchAlgorithmException, InvalidKeySpecException
@@ -175,14 +179,29 @@ public class Encryptor
 		
 		}
 		
-		BufferedBlockCipher cipher = new PaddedBufferedBlockCipher(new CBCBlockCipher((BlockCipher) Algs[alg]), padding);
-		cipher.reset();
-		cipher.init(true, cipherParams);
+		byte[] output;
+		if (alg == 7 || alg == 8)
+		{
+			BufferedBlockCipher cipher = new PaddedBufferedBlockCipher(new CBCBlockCipher((BlockCipher) Algs[alg]), padding);
+			cipher.reset();
+			cipher.init(true, cipherParams);
+			output = new byte[cipher.getOutputSize(input.length)];
+			int bytesWrittenOut = cipher.processBytes(input, 0, input.length, output, 0);
+			bytesWrittenOut += cipher.doFinal(output, bytesWrittenOut);
+		}
 		
-		byte[] output = new byte[cipher.getOutputSize(input.length)];
+		else
+		{
+			AEADBlockCipher cipher = new GCMBlockCipher((BlockCipher) Algs[alg]);
+			cipher.reset();
+			cipher.init(true, cipherParams);
+			output = new byte[cipher.getOutputSize(input.length)];
+			
+			int bytesWrittenOut = cipher.processBytes(input, 0, input.length, output, 0);
+			bytesWrittenOut += cipher.doFinal(output, bytesWrittenOut);
+		}
 		
-		int bytesWrittenOut = cipher.processBytes(input, 0, input.length, output, 0);
-		bytesWrittenOut += cipher.doFinal(output, bytesWrittenOut);
+		
 		
 		byte[] bytesAll = new byte[ivData.length + output.length + salt.getBytes().length];
 		System.arraycopy(ivData, 0, bytesAll, 0, ivData.length);
@@ -215,14 +234,34 @@ public class Encryptor
 			break;
 		}
 		
-		BufferedBlockCipher cipher = new PaddedBufferedBlockCipher(new CBCBlockCipher((BlockCipher) Algs[alg]), padding);
-		cipher.reset();
-		cipher.init(false, cipherParams);
+		byte[] output;
+		int bytesWrittenin;
+		if (alg == 7 || alg == 8)
+		{
+			BufferedBlockCipher cipher = new PaddedBufferedBlockCipher(new CBCBlockCipher((BlockCipher) Algs[alg]), padding);
+			cipher.reset();
+			cipher.init(false, cipherParams);
+			
+			output = new byte[cipher.getOutputSize(rawEnc.length - blockSize/8)];
+			
+			bytesWrittenin = cipher.processBytes(rawEnc, blockSize/8, rawEnc.length - blockSize/8, output, 0);
+			bytesWrittenin += cipher.doFinal(output, bytesWrittenin);
+
+		}
 		
-		byte[] output = new byte[cipher.getOutputSize(rawEnc.length - blockSize/8)];
+		else
+		{
+			AEADBlockCipher cipher = new GCMBlockCipher((BlockCipher) Algs[alg]);
+			cipher.reset();
+			cipher.init(false, cipherParams);
+			
+			output = new byte[cipher.getOutputSize(rawEnc.length - blockSize/8)];
+			
+			bytesWrittenin = cipher.processBytes(rawEnc, blockSize/8, rawEnc.length - blockSize/8, output, 0);
+			bytesWrittenin += cipher.doFinal(output, bytesWrittenin);
+
+		}
 		
-		int bytesWrittenin = cipher.processBytes(rawEnc, blockSize/8, rawEnc.length - blockSize/8, output, 0);
-		bytesWrittenin += cipher.doFinal(output, bytesWrittenin);
 		
 		byte[] Dec = new byte[bytesWrittenin];
 		System.arraycopy(output, 0, Dec, 0, bytesWrittenin);
